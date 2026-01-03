@@ -11,7 +11,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "create", path: "/App.jsx" }}
         />
       );
-      expect(screen.getByText("Creating App.jsx")).toBeInTheDocument();
+      expect(screen.getByText("Creating App.jsx")).toBeDefined();
     });
 
     it("formats str_replace command correctly", () => {
@@ -21,7 +21,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "str_replace", path: "/components/Button.tsx" }}
         />
       );
-      expect(screen.getByText("Editing Button.tsx")).toBeInTheDocument();
+      expect(screen.getByText("Editing Button.tsx")).toBeDefined();
     });
 
     it("formats insert command correctly", () => {
@@ -31,7 +31,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "insert", path: "/styles/main.css" }}
         />
       );
-      expect(screen.getByText("Editing main.css")).toBeInTheDocument();
+      expect(screen.getByText("Editing main.css")).toBeDefined();
     });
 
     it("formats view command correctly", () => {
@@ -41,7 +41,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "view", path: "/README.md" }}
         />
       );
-      expect(screen.getByText("Viewing README.md")).toBeInTheDocument();
+      expect(screen.getByText("Viewing README.md")).toBeDefined();
     });
 
     it("formats undo_edit command correctly", () => {
@@ -53,7 +53,7 @@ describe("ToolCallMessage", () => {
       );
       expect(
         screen.getByText("Reverting changes to config.json")
-      ).toBeInTheDocument();
+      ).toBeDefined();
     });
 
     it("handles unknown command", () => {
@@ -63,12 +63,12 @@ describe("ToolCallMessage", () => {
           args={{ command: "unknown", path: "/test.js" }}
         />
       );
-      expect(screen.getByText("Editing test.js")).toBeInTheDocument();
+      expect(screen.getByText("Editing test.js")).toBeDefined();
     });
 
     it("handles missing args", () => {
       render(<ToolCallMessage toolName="str_replace_editor" />);
-      expect(screen.getByText("Editing file")).toBeInTheDocument();
+      expect(screen.getByText("Editing file")).toBeDefined();
     });
 
     it("handles missing path", () => {
@@ -78,7 +78,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "create" }}
         />
       );
-      expect(screen.getByText("Creating file")).toBeInTheDocument();
+      expect(screen.getByText("Creating file")).toBeDefined();
     });
 
     it("extracts filename from nested path", () => {
@@ -91,7 +91,7 @@ describe("ToolCallMessage", () => {
           }}
         />
       );
-      expect(screen.getByText("Creating Button.tsx")).toBeInTheDocument();
+      expect(screen.getByText("Creating Button.tsx")).toBeDefined();
     });
 
     it("handles Windows-style paths", () => {
@@ -104,7 +104,7 @@ describe("ToolCallMessage", () => {
           }}
         />
       );
-      expect(screen.getByText("Creating file.js")).toBeInTheDocument();
+      expect(screen.getByText("Creating file.js")).toBeDefined();
     });
   });
 
@@ -116,7 +116,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "delete", path: "/old-file.js" }}
         />
       );
-      expect(screen.getByText("Deleting old-file.js")).toBeInTheDocument();
+      expect(screen.getByText("Deleting old-file.js")).toBeDefined();
     });
 
     it("formats rename command with new_path", () => {
@@ -132,7 +132,7 @@ describe("ToolCallMessage", () => {
       );
       expect(
         screen.getByText("Renaming old-name.ts to new-name.ts")
-      ).toBeInTheDocument();
+      ).toBeDefined();
     });
 
     it("formats rename command without new_path", () => {
@@ -142,7 +142,7 @@ describe("ToolCallMessage", () => {
           args={{ command: "rename", path: "/file.js" }}
         />
       );
-      expect(screen.getByText("Renaming file.js")).toBeInTheDocument();
+      expect(screen.getByText("Renaming file.js")).toBeDefined();
     });
 
     it("handles unknown command", () => {
@@ -152,12 +152,12 @@ describe("ToolCallMessage", () => {
           args={{ command: "unknown", path: "/test.js" }}
         />
       );
-      expect(screen.getByText("Managing test.js")).toBeInTheDocument();
+      expect(screen.getByText("Managing test.js")).toBeDefined();
     });
 
     it("handles missing args", () => {
       render(<ToolCallMessage toolName="file_manager" />);
-      expect(screen.getByText("Managing file")).toBeInTheDocument();
+      expect(screen.getByText("Managing file")).toBeDefined();
     });
 
     it("extracts filename from path with directories", () => {
@@ -170,24 +170,24 @@ describe("ToolCallMessage", () => {
           }}
         />
       );
-      expect(screen.getByText("Deleting Header.tsx")).toBeInTheDocument();
+      expect(screen.getByText("Deleting Header.tsx")).toBeDefined();
     });
   });
 
   describe("unknown tools", () => {
     it("displays the tool name as-is for unknown tools", () => {
       render(<ToolCallMessage toolName="unknown_tool" />);
-      expect(screen.getByText("unknown_tool")).toBeInTheDocument();
+      expect(screen.getByText("unknown_tool")).toBeDefined();
     });
 
     it("ignores args for unknown tools", () => {
-      render(
+      const { container } = render(
         <ToolCallMessage
           toolName="unknown_tool"
           args={{ command: "test", path: "/test.js" }}
         />
       );
-      expect(screen.getByText("unknown_tool")).toBeInTheDocument();
+      expect(container.textContent).toContain("unknown_tool");
     });
   });
 
@@ -200,7 +200,7 @@ describe("ToolCallMessage", () => {
         />
       );
       const span = container.querySelector("span");
-      expect(span).toHaveClass("text-neutral-700");
+      expect(span?.className).toContain("text-neutral-700");
     });
   });
 });

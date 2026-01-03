@@ -1,0 +1,16 @@
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\shane\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\shane\OneDrive\Documentos\anthropicCourse\package-lock.json
+
+ ⚠ Port 3000 is in use by process 16280, using available port 3003 instead.
+   ▲ Next.js 15.5.9 (Turbopack)
+   - Local:        http://localhost:3003
+   - Network:      http://10.2.0.2:3003
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Compiled middleware in 222ms
+ ✓ Ready in 2s
